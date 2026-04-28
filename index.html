@@ -5,132 +5,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HatoRay | Official Links</title>
     <style>
-        /* 基礎設定 */
+        /* 基礎設定與動態背景 */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: #000;
+            font-family: 'Montserrat', 'Inter', sans-serif;
+            background: #050505;
             color: white;
             overflow-x: hidden;
+            display: flex;
+            justify-content: center;
         }
 
-        /* 背景：建議放一張經過 AI 藝術處理後的圖片 */
         .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964') no-repeat center center/cover;
+            background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #050505 100%);
             z-index: -1;
-            filter: blur(10px);
         }
 
-        /* 內容容器 */
+        /* 裝飾性霓虹光暈 */
+        .neon-glow {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: rgba(138, 43, 226, 0.2);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
         .container {
-            max-width: 450px;
-            margin: 0 auto;
-            padding: 60px 20px;
+            max-width: 400px;
+            width: 90%;
+            padding: 60px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        /* 大頭照 */
+        /* 藝術頭像設定 */
         .profile-pic {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.5);
-            margin-bottom: 20px;
+            border: 2px solid #8a2be2;
+            margin-bottom: 25px;
             object-fit: cover;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-pic:hover {
+            transform: rotate(5deg) scale(1.05);
         }
 
         .name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .bio {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 40px;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 45px;
+            line-height: 1.6;
+            letter-spacing: 1px;
+            text-align: center; /* 確保文字置中 */
         }
 
-        /* 按鈕列表 */
+        /* 藝術感按鈕設計 */
         .links {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 18px;
         }
 
-        /* 玻璃質感按鈕 */
         .link-btn {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(138, 43, 226, 0.3);
             color: white;
-            padding: 16px;
-            border-radius: 15px;
+            padding: 18px;
+            border-radius: 2px; /* 銳利的方型邊角增加藝術感 */
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
         }
 
         .link-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transform: scale(1.03);
+            background: rgba(138, 43, 226, 0.1);
+            border-color: #8a2be2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+            transform: translateY(-3px);
         }
 
-        /* 特別突出的 CTA 按鈕 (Fansly/PMV Haven) */
+        /* 重點推薦平台：帶有發光效果 */
         .cta-btn {
-            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+            border: 1px solid #00d2ff;
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        .cta-btn:hover {
+            border-color: #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
         }
 
         .footer {
-            margin-top: 60px;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 1px;
+            margin-top: 80px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
     <div class="background"></div>
+    <div class="neon-glow"></div>
 
     <div class="container">
-        <img src="https://via.placeholder.com/150" alt="HatoRay" class="profile-pic">
+        <img src="進巨艾倫.jpg" alt="HatoRay" class="profile-pic">
         
         <div class="name">HatoRay</div>
-        <div class="bio">藝術家 提供極致感官體驗</div>
+        <div class="bio">Artists<br>Ultimate Sensory Experience</div>
 
         <div class="links">
             <a href="https://www.facebook.com/profile.php?id=61581091841365" target="_blank" class="link-btn">Facebook</a>
             <a href="https://www.instagram.com/hatoray123/" target="_blank" class="link-btn">Instagram</a>
             <a href="https://www.threads.com/@hatoray123" target="_blank" class="link-btn">Threads</a>
-            <a href="https://x.com/HatoRay_XXX" target="_blank" class="link-btn">X (Twitter)</a>
+            <a href="https://x.com/HatoRay_XXX" target="_blank" class="link-btn">X Platform</a>
             <a href="https://www.tiktok.com/@hatoray0" target="_blank" class="link-btn">TikTok</a>
             
             <a href="https://pmvhaven.com/profile" target="_blank" class="link-btn cta-btn">PMV Haven</a>
-            <a href="https://fansly.com/hatoray/posts" target="_blank" class="link-btn cta-btn">Exclusive (Fansly)</a>
+            <a href="https://fansly.com/hatoray/posts" target="_blank" class="link-btn cta-btn">Fansly (Exclusive)</a>
         </div>
 
         <div class="footer">
