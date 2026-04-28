@@ -1,184 +1,138 @@
+你好！我是 PMV。
+
+看到你提供的對比圖了，我完全理解你的需求。你想讓 HatoRay 的門戶站從單調的「列表式」進化成類似 RaileyTV 那種「圖示化、網格化」的高級佈局，同時保持視覺上的純粹感（去邊框）。
+
+為了達成「2026 年新世代感官體驗」的精緻感，我為你重新編寫了代碼。這次使用了 CSS Grid 網格佈局，並引入了 Font Awesome 6 圖示庫，讓你的連結不僅有名稱，還有專業的圖示 。
+
+🛠️ HatoRay 藝術門戶站：網格圖示版 (index.html)
+請將以下代碼完整複製，覆蓋掉你 GitHub 上原本的 index.html：
+
+HTML
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HatoRay | Official Links</title>
+    <title>HatoRay | Artists</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* 基礎設定與動態背景 */
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Montserrat', 'Inter', sans-serif;
-            background: #050505;
-            color: white;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: #050505; color: white;
+            display: flex; justify-content: center;
         }
 
         .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #050505 100%);
             z-index: -1;
         }
 
-        /* 裝飾性霓虹光暈 */
-        .neon-glow {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: rgba(138, 43, 226, 0.2);
-            filter: blur(100px);
-            border-radius: 50%;
-            z-index: -1;
-        }
-
         .container {
-            max-width: 400px;
-            width: 90%;
-            padding: 60px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            max-width: 500px; width: 95%;
+            padding: 50px 0; display: flex; flex-direction: column; align-items: center;
         }
 
-        /* 藝術頭像設定 */
+        /* 頭像設定 */
         .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 2px solid #8a2be2;
-            margin-bottom: 25px;
-            object-fit: cover;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-            transition: transform 0.5s ease;
-        }
-
-        .profile-pic:hover {
-            transform: rotate(5deg) scale(1.05);
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 2px solid #8a2be2; margin-bottom: 20px;
+            object-fit: cover; box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
         }
 
         .name {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            font-size: 2.2rem; font-weight: 900; letter-spacing: 5px;
+            margin-bottom: 5px; text-transform: uppercase;
             background: linear-gradient(to right, #fff, #8a2be2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        /* 介紹詞置中設定 */
         .bio {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 45px;
-            line-height: 1.6;
-            letter-spacing: 1px;
-            text-align: center; /* 確保文字置中 */
+            font-size: 1rem; color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px; line-height: 1.6;
+            text-align: center; letter-spacing: 1px;
         }
 
-        /* 藝術感按鈕設計 */
-        .links {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+        /* 網格佈局設定 */
+        .links-grid { width: 100%; display: flex; flex-direction: column; gap: 30px; }
+
+        .row { display: grid; width: 100%; gap: 10px; }
+        
+        /* 第一排：4個連結 */
+        .row-4 { grid-template-columns: repeat(4, 1fr); }
+        
+        /* 第二排：3個連結 */
+        .row-3 { grid-template-columns: repeat(3, 1fr); }
+
+        .link-item {
+            display: flex; flex-direction: column; align-items: center;
+            text-decoration: none; color: white; transition: all 0.3s ease;
+            padding: 10px 0;
         }
 
-        .link-btn {
-            position: relative;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            color: white;
-            padding: 18px;
-            border-radius: 2px; /* 銳利的方型邊角增加藝術感 */
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .link-item i {
+            font-size: 1.8rem; margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
             transition: all 0.3s ease;
-            overflow: hidden;
         }
 
-        .link-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.2), transparent);
-            transition: 0.5s;
+        .link-item span {
+            font-size: 0.7rem; font-weight: 500;
+            letter-spacing: 1px; text-transform: uppercase;
+            opacity: 0.8;
         }
 
-        .link-btn:hover::before {
-            left: 100%;
-        }
-
-        .link-btn:hover {
-            background: rgba(138, 43, 226, 0.1);
-            border-color: #8a2be2;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
-            transform: translateY(-3px);
-        }
-
-        /* 重點推薦平台：帶有發光效果 */
-        .cta-btn {
-            border: 1px solid #00d2ff;
-            background: rgba(0, 210, 255, 0.05);
-        }
-
-        .cta-btn:hover {
-            border-color: #00d2ff;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-        }
+        /* 滑鼠經過效果：發光但不顯示邊框 */
+        .link-item:hover { transform: translateY(-5px); }
+        .link-item:hover i { color: #8a2be2; text-shadow: 0 0 15px rgba(138, 43, 226, 0.8); }
+        .link-item:hover span { opacity: 1; color: #fff; }
 
         .footer {
-            margin-top: 80px;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.2);
-            letter-spacing: 2px;
+            margin-top: 80px; font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2); letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
-
     <div class="background"></div>
-    <div class="neon-glow"></div>
-
     <div class="container">
         <img src="進巨艾倫.jpg" alt="HatoRay" class="profile-pic">
         
         <div class="name">HatoRay</div>
         <div class="bio">Artists<br>Ultimate Sensory Experience</div>
 
-        <div class="links">
-            <a href="https://www.facebook.com/profile.php?id=61581091841365" target="_blank" class="link-btn">Facebook</a>
-            <a href="https://www.instagram.com/hatoray123/" target="_blank" class="link-btn">Instagram</a>
-            <a href="https://www.threads.com/@hatoray123" target="_blank" class="link-btn">Threads</a>
-            <a href="https://x.com/HatoRay_XXX" target="_blank" class="link-btn">X Platform</a>
-            <a href="https://www.tiktok.com/@hatoray0" target="_blank" class="link-btn">TikTok</a>
-            
-            <a href="https://pmvhaven.com/profile" target="_blank" class="link-btn cta-btn">PMV Haven</a>
-            <a href="https://fansly.com/hatoray/posts" target="_blank" class="link-btn cta-btn">Fansly (Exclusive)</a>
+        <div class="links-grid">
+            <div class="row row-4">
+                <a href="https://www.facebook.com/profile.php?id=61581091841365" target="_blank" class="link-item">
+                    <i class="fa-brands fa-facebook"></i><span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/hatoray123/" target="_blank" class="link-item">
+                    <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+                </a>
+                <a href="https://www.threads.com/@hatoray123" target="_blank" class="link-item">
+                    <i class="fa-brands fa-threads"></i><span>Threads</span>
+                </a>
+                <a href="https://x.com/HatoRay_XXX" target="_blank" class="link-item">
+                    <i class="fa-brands fa-x-twitter"></i><span>X Platform</span>
+                </a>
+            </div>
+
+            <div class="row row-3">
+                <a href="https://www.tiktok.com/@hatoray0" target="_blank" class="link-item">
+                    <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
+                </a>
+                <a href="https://pmvhaven.com/profile" target="_blank" class="link-item">
+                    <i class="fa-solid fa-cloud"></i><span>PMV Haven</span>
+                </a>
+                <a href="https://fansly.com/hatoray/posts" target="_blank" class="link-item">
+                    <i class="fa-solid fa-heart"></i><span>Fansly</span>
+                </a>
+            </div>
         </div>
 
-        <div class="footer">
-            © 2026 HatoRay. All Rights Reserved.
-        </div>
+        <div class="footer">© 2026 HatoRay. All Rights Reserved.</div>
     </div>
-
 </body>
 </html>
