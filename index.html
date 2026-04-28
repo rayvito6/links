@@ -12,40 +12,61 @@
             --br-black: #050505;
         }
 
-        /* 直接將背景圖設定在 body 上，解決被遮蓋的問題 */
+        /* 修正：將背景圖鎖定在 body，並使用正確的檔名 bg.jpg.jpg */
         body {
-            margin: 0; padding: 0; min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* 這裡的路徑已修改為符合你截圖中的 bg.jpg.jpg */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('bg.jpg') no-repeat center center fixed;
+                        url('bg.jpg.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: white; font-family: 'Montserrat', sans-serif;
-            display: flex; justify-content: center;
+            background-color: var(--br-black); /* 圖片還沒跑出來前用黑色墊底 */
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
             overflow-x: hidden;
         }
 
         .container {
-            max-width: 500px; width: 90%;
-            padding: 60px 0; display: flex; flex-direction: column; align-items: center;
-            z-index: 1; /* 確保內容在最前面 */
+            max-width: 500px;
+            width: 90%;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
         }
 
         .profile-pic {
-            width: 130px; height: 130px; border-radius: 50%;
-            border: 2px solid var(--br-orange); margin-bottom: 25px;
-            object-fit: cover; box-shadow: 0 0 35px rgba(255, 102, 0, 0.5);
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid var(--br-orange);
+            margin-bottom: 25px;
+            object-fit: cover;
+            box-shadow: 0 0 35px rgba(255, 102, 0, 0.5);
         }
 
         .name {
-            font-size: 2.6rem; font-weight: 900; letter-spacing: 9px;
-            margin-bottom: 12px; text-transform: uppercase;
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: 9px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
             text-shadow: 0 0 15px var(--br-orange);
-            color: white; text-align: center;
+            color: white;
+            text-align: center;
         }
 
         .bio {
-            font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 50px; line-height: 1.8;
-            text-align: center; letter-spacing: 2.5px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            text-align: center;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
 
@@ -55,19 +76,26 @@
         .row-3 { grid-template-columns: repeat(3, 1fr); }
 
         .link-item {
-            display: flex; flex-direction: column; align-items: center;
-            text-decoration: none; color: white; transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s ease;
         }
 
         .link-item i {
-            font-size: 1.8rem; margin-bottom: 12px;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
             color: var(--br-cyan);
             filter: drop-shadow(0 0 7px var(--br-cyan));
         }
 
         .link-item span {
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 1.5px; text-transform: uppercase;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             opacity: 0.7;
         }
 
@@ -76,8 +104,10 @@
         .link-item:hover span { opacity: 1; text-shadow: 0 0 7px white; }
 
         .footer {
-            margin-top: 100px; font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.2); letter-spacing: 3px;
+            margin-top: 100px;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 3px;
         }
 
         @media (max-width: 400px) {
